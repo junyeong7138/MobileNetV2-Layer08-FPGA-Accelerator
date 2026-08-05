@@ -1,0 +1,66 @@
+<svg width="760" height="380" viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1.5 1.5L8 5L1.5 8.5" fill="none" stroke="#6B7280" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect width="760" height="380" fill="#FFFFFF"/>
+  <text x="380" y="30" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#1F2937">고정소수점 데이터패스 (int16 · 값 = 정수코드 × 2⁻ⁿ · 시뮬레이션 검증: 불일치 0/12,544)</text>
+
+  <!-- Row 1: 확장 -->
+  <rect x="30" y="58" width="120" height="48" rx="9" fill="#E7F5EF" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="90" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F5132">입력 Q3.12</text>
+  <text x="90" y="96" text-anchor="middle" font-size="10.5" fill="#3E7D68">signed · ±8.0</text>
+  <line x1="150" y1="82" x2="178" y2="82" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar4)"/>
+  <rect x="182" y="58" width="210" height="48" rx="9" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+  <text x="287" y="78" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#4C3585">① 1×1 확장 · W 스케일 2⁻¹⁶</text>
+  <text x="287" y="96" text-anchor="middle" font-size="10.5" fill="#6B4FA3">누산 32b (소수부 f = 28)</text>
+  <line x1="392" y1="82" x2="420" y2="82" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar4)"/>
+  <rect x="424" y="58" width="180" height="48" rx="9" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="514" y="78" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#374151">+bias → ReLU6</text>
+  <text x="514" y="96" text-anchor="middle" font-size="10.5" fill="#4B5563">≫15 · 반올림 · 포화</text>
+  <line x1="604" y1="82" x2="632" y2="82" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar4)"/>
+  <rect x="636" y="58" width="100" height="48" rx="9" fill="#E7F5EF" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="686" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F5132">UQ3.13</text>
+  <text x="686" y="96" text-anchor="middle" font-size="10.5" fill="#3E7D68">unsigned · 0~8</text>
+
+  <polyline points="686,106 686,128 90,128 90,150" fill="none" stroke="#D1D5DB" stroke-width="1.4" marker-end="url(#ar4)"/>
+
+  <!-- Row 2: DW -->
+  <rect x="30" y="154" width="120" height="48" rx="9" fill="#E7F5EF" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="90" y="174" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F5132">UQ3.13</text>
+  <text x="90" y="192" text-anchor="middle" font-size="10.5" fill="#3E7D68">ReLU6 보장 ≤ 6</text>
+  <line x1="150" y1="178" x2="178" y2="178" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar4)"/>
+  <rect x="182" y="154" width="210" height="48" rx="9" fill="#FCEAE8" stroke="#E2574C" stroke-width="1.5"/>
+  <text x="287" y="174" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#8F2D25">② 3×3 DW · W 스케일 2⁻¹¹</text>
+  <text x="287" y="192" text-anchor="middle" font-size="10.5" fill="#B0554C">누산 32b (f = 24) · 별도 엔진</text>
+  <line x1="392" y1="178" x2="420" y2="178" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar4)"/>
+  <rect x="424" y="154" width="180" height="48" rx="9" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="514" y="174" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#374151">+bias → ReLU6</text>
+  <text x="514" y="192" text-anchor="middle" font-size="10.5" fill="#4B5563">≫11 · 반올림 · 포화</text>
+  <line x1="604" y1="178" x2="632" y2="178" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar4)"/>
+  <rect x="636" y="154" width="100" height="48" rx="9" fill="#E7F5EF" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="686" y="174" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F5132">UQ3.13</text>
+  <text x="686" y="192" text-anchor="middle" font-size="10.5" fill="#3E7D68">unsigned · 0~8</text>
+
+  <polyline points="686,202 686,224 90,224 90,246" fill="none" stroke="#D1D5DB" stroke-width="1.4" marker-end="url(#ar4)"/>
+
+  <!-- Row 3: 축소 -->
+  <rect x="30" y="250" width="120" height="48" rx="9" fill="#E7F5EF" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="90" y="270" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F5132">UQ3.13</text>
+  <line x1="150" y1="274" x2="178" y2="274" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar4)"/>
+  <rect x="182" y="250" width="210" height="48" rx="9" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+  <text x="287" y="270" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#4C3585">③ 1×1 축소 · W 스케일 2⁻¹⁴</text>
+  <text x="287" y="288" text-anchor="middle" font-size="10.5" fill="#6B4FA3">누산 32b (f = 27)</text>
+  <line x1="392" y1="274" x2="420" y2="274" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar4)"/>
+  <rect x="424" y="250" width="180" height="48" rx="9" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="514" y="270" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#374151">+bias (Linear)</text>
+  <text x="514" y="288" text-anchor="middle" font-size="10.5" fill="#4B5563">≫15 · 반올림 · 포화</text>
+  <line x1="604" y1="274" x2="632" y2="274" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar4)"/>
+  <rect x="636" y="250" width="100" height="48" rx="9" fill="#E7F5EF" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="686" y="270" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F5132">Q3.12</text>
+  <text x="686" y="288" text-anchor="middle" font-size="10.5" fill="#3E7D68">signed</text>
+
+  <text x="380" y="336" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#4C3585">⊕ residual: 입력(Q3.12)과 동일 포맷 → 정수 덧셈 1개 → 최종 출력 Q3.12 (다음 레이어 입력으로 직결)</text>
+  <text x="380" y="360" text-anchor="middle" font-size="11" fill="#6B7280">반올림 규칙: round-half-up (2^(s−1) 가산 후 산술 시프트) — C 고정소수점 모델과 RTL 동일 규칙 필수</text>
+</svg>

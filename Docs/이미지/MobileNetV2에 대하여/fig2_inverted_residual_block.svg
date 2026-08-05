@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" font-family="'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif">
+  <defs>
+    <marker id="arr2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#334155"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#0369a1"/></marker>
+  </defs>
+  <rect width="1000" height="620" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#1e293b">그림 2. MobileNetV2 Inverted Residual Bottleneck 블록 (Table 1 · Figure 4d)</text>
+  <text x="500" y="58" text-anchor="middle" font-size="14" fill="#475569">narrow → wide(×t) → narrow  ·  블록 폭 = 채널 수  ·  빗금 없는 마지막 1×1은 Linear(활성화 없음)</text>
+
+  <!-- ===== Stride=1 block (with skip) ===== -->
+  <text x="250" y="96" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">(a) Stride = 1 블록 — Skip Connection 있음</text>
+
+  <!-- input narrow -->
+  <rect x="190" y="120" width="120" height="34" rx="6" fill="#94a3b8" stroke="#334155"/>
+  <text x="250" y="142" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">입력 h×w×k (narrow)</text>
+
+  <line x1="250" y1="154" x2="250" y2="180" stroke="#334155" stroke-width="2" marker-end="url(#arr2)"/>
+  <!-- expansion -->
+  <rect x="130" y="184" width="240" height="44" rx="6" fill="#818cf8" stroke="#4338ca"/>
+  <text x="250" y="203" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">① 1×1 Conv (Expansion ×t) + ReLU6</text>
+  <text x="250" y="221" text-anchor="middle" font-size="12.5" fill="#e0e7ff">h×w×k → h×w×tk  (기본 t=6)</text>
+
+  <line x1="250" y1="228" x2="250" y2="254" stroke="#334155" stroke-width="2" marker-end="url(#arr2)"/>
+  <!-- depthwise -->
+  <rect x="130" y="258" width="240" height="44" rx="6" fill="#fbbf24" stroke="#b45309"/>
+  <text x="250" y="277" text-anchor="middle" font-size="13.5" font-weight="700" fill="#451a03">② 3×3 Depthwise (s=1) + ReLU6</text>
+  <text x="250" y="295" text-anchor="middle" font-size="12.5" fill="#78350f">h×w×tk → h×w×tk  (공간 필터링)</text>
+
+  <line x1="250" y1="302" x2="250" y2="328" stroke="#334155" stroke-width="2" marker-end="url(#arr2)"/>
+  <!-- projection -->
+  <rect x="130" y="332" width="240" height="44" rx="6" fill="#f1f5f9" stroke="#0f172a" stroke-dasharray="none"/>
+  <path d="M130,332 l240,44 M130,354 l120,22 M250,332 l120,22" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="250" y="351" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0f172a">③ 1×1 Conv (Projection) — Linear!</text>
+  <text x="250" y="369" text-anchor="middle" font-size="12.5" fill="#334155">h×w×tk → h×w×k′  (ReLU 없음 = Linear Bottleneck)</text>
+
+  <line x1="250" y1="376" x2="250" y2="402" stroke="#334155" stroke-width="2" marker-end="url(#arr2)"/>
+  <!-- add -->
+  <circle cx="250" cy="418" r="16" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+  <text x="250" y="424" text-anchor="middle" font-size="18" font-weight="700" fill="#15803d">+</text>
+  <line x1="250" y1="434" x2="250" y2="460" stroke="#334155" stroke-width="2" marker-end="url(#arr2)"/>
+  <rect x="190" y="464" width="120" height="34" rx="6" fill="#94a3b8" stroke="#334155"/>
+  <text x="250" y="486" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">출력 h×w×k′ (narrow)</text>
+
+  <!-- skip path -->
+  <path d="M310,137 C420,137 420,418 268,418" fill="none" stroke="#0369a1" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrB)"/>
+  <text x="428" y="270" font-size="13" font-weight="700" fill="#0369a1" transform="rotate(90 428 270)" text-anchor="middle">Skip: bottleneck ↔ bottleneck 연결</text>
+  <text x="250" y="522" text-anchor="middle" font-size="12.5" fill="#475569">※ skip은 k = k′ 이고 stride=1일 때만 (차원 일치 필요)</text>
+
+  <!-- ===== Stride=2 block ===== -->
+  <text x="760" y="96" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">(b) Stride = 2 블록 — Skip 없음 (다운샘플링)</text>
+
+  <rect x="700" y="120" width="120" height="34" rx="6" fill="#94a3b8" stroke="#334155"/>
+  <text x="760" y="142" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">입력 h×w×k</text>
+
+  <line x1="760" y1="154" x2="760" y2="180" stroke="#334155" stroke-width="2" marker-end="url(#arr2)"/>
+  <rect x="640" y="184" width="240" height="44" rx="6" fill="#818cf8" stroke="#4338ca"/>
+  <text x="760" y="203" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">① 1×1 Conv (Expansion ×t) + ReLU6</text>
+  <text x="760" y="221" text-anchor="middle" font-size="12.5" fill="#e0e7ff">h×w×k → h×w×tk</text>
+
+  <line x1="760" y1="228" x2="760" y2="254" stroke="#334155" stroke-width="2" marker-end="url(#arr2)"/>
+  <rect x="640" y="258" width="240" height="44" rx="6" fill="#fbbf24" stroke="#b45309"/>
+  <text x="760" y="277" text-anchor="middle" font-size="13.5" font-weight="700" fill="#451a03">② 3×3 Depthwise (s=2) + ReLU6</text>
+  <text x="760" y="295" text-anchor="middle" font-size="12.5" fill="#78350f">h×w×tk → (h/2)×(w/2)×tk  (해상도 ↓)</text>
+
+  <line x1="760" y1="302" x2="760" y2="328" stroke="#334155" stroke-width="2" marker-end="url(#arr2)"/>
+  <rect x="640" y="332" width="240" height="44" rx="6" fill="#f1f5f9" stroke="#0f172a"/>
+  <path d="M640,332 l240,44 M640,354 l120,22 M760,332 l120,22" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="760" y="351" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0f172a">③ 1×1 Conv (Projection) — Linear!</text>
+  <text x="760" y="369" text-anchor="middle" font-size="12.5" fill="#334155">(h/2)×(w/2)×tk → (h/2)×(w/2)×k′</text>
+
+  <line x1="760" y1="376" x2="760" y2="402" stroke="#334155" stroke-width="2" marker-end="url(#arr2)"/>
+  <rect x="690" y="406" width="140" height="34" rx="6" fill="#94a3b8" stroke="#334155"/>
+  <text x="760" y="428" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">출력 (h/2)×(w/2)×k′</text>
+
+  <!-- MAdds formula box -->
+  <rect x="600" y="470" width="340" height="66" rx="10" fill="#fef2f2" stroke="#dc2626"/>
+  <text x="770" y="496" text-anchor="middle" font-size="14.5" font-weight="700" fill="#7f1d1d">블록 총 MAC = h·w·d′·t·(d′ + k² + d″)</text>
+  <text x="770" y="520" text-anchor="middle" font-size="12.5" fill="#991b1b">d′=입력 ch, d″=출력 ch, t=확장비, k=DW 커널 (①+②+③ 합)</text>
+
+  <rect x="60" y="552" width="880" height="52" rx="10" fill="#eff6ff" stroke="#2563eb"/>
+  <text x="80" y="574" font-size="14" font-weight="700" fill="#1e3a8a">★ 하드웨어 관점</text>
+  <text x="80" y="595" font-size="13" fill="#1e40af">확장 텐서(×t, 최대 6배)는 블록 내부에서만 생성·소멸 → 온칩 버퍼에는 양 끝 bottleneck 텐서만 상주시키면 됨 (그림 4의 메모리 트릭과 연결)</text>
+</svg>

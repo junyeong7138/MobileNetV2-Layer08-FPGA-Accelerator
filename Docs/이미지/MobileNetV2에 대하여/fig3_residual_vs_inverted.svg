@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" font-family="'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif">
+  <defs>
+    <marker id="arr3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#334155"/></marker>
+    <marker id="arrC" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#0369a1"/></marker>
+  </defs>
+  <rect width="1000" height="600" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#1e293b">그림 3. 클래식 Residual vs Inverted Residual (논문 Figure 3) — 블록 폭 = 채널 수</text>
+
+  <!-- (a) classical residual: wide -> narrow -> wide -->
+  <text x="255" y="80" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">(a) 클래식 Residual (ResNet)</text>
+  <text x="255" y="102" text-anchor="middle" font-size="13.5" fill="#475569">wide → narrow(압축) → wide  ·  skip은 "넓은" 층 사이</text>
+
+  <rect x="105" y="130" width="300" height="40" rx="6" fill="#60a5fa" stroke="#1d4ed8"/>
+  <text x="255" y="155" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Wide (고차원, ReLU)</text>
+  <line x1="255" y1="170" x2="255" y2="192" stroke="#334155" stroke-width="2" marker-end="url(#arr3)"/>
+  <rect x="185" y="196" width="140" height="40" rx="6" fill="#93c5fd" stroke="#1d4ed8"/>
+  <text x="255" y="221" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">Narrow 1×1 압축 (ReLU)</text>
+  <line x1="255" y1="236" x2="255" y2="258" stroke="#334155" stroke-width="2" marker-end="url(#arr3)"/>
+  <rect x="105" y="262" width="300" height="40" rx="6" fill="#60a5fa" stroke="#1d4ed8"/>
+  <text x="255" y="287" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Wide (고차원, ReLU)</text>
+  <path d="M405,150 C480,150 480,282 405,282" fill="none" stroke="#0369a1" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrC)"/>
+  <text x="472" y="222" font-size="12.5" font-weight="700" fill="#0369a1" transform="rotate(90 472 222)" text-anchor="middle">skip: wide↔wide</text>
+  <text x="255" y="330" text-anchor="middle" font-size="12.5" fill="#7f1d1d">→ 큰(wide) 텐서가 skip 경로에 존재 = 메모리에 상주해야 함</text>
+
+  <!-- (b) inverted -->
+  <text x="755" y="80" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">(b) Inverted Residual (MobileNetV2)</text>
+  <text x="755" y="102" text-anchor="middle" font-size="13.5" fill="#475569">narrow → wide(확장) → narrow  ·  skip은 "얇은" bottleneck 사이</text>
+
+  <rect x="685" y="130" width="140" height="40" rx="6" fill="#94a3b8" stroke="#334155"/>
+  <text x="755" y="155" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Narrow (Linear ✕ReLU)</text>
+  <line x1="755" y1="170" x2="755" y2="192" stroke="#334155" stroke-width="2" marker-end="url(#arr3)"/>
+  <rect x="605" y="196" width="300" height="40" rx="6" fill="#818cf8" stroke="#4338ca"/>
+  <text x="755" y="221" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Wide ×t 확장 + DW 3×3 (ReLU6)</text>
+  <line x1="755" y1="236" x2="755" y2="258" stroke="#334155" stroke-width="2" marker-end="url(#arr3)"/>
+  <rect x="685" y="262" width="140" height="40" rx="6" fill="#94a3b8" stroke="#334155"/>
+  <text x="755" y="287" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Narrow (Linear ✕ReLU)</text>
+  <path d="M685,150 C610,150 610,282 685,282" fill="none" stroke="#0369a1" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrC)"/>
+  <text x="618" y="222" font-size="12.5" font-weight="700" fill="#0369a1" transform="rotate(-90 618 222)" text-anchor="middle">skip: narrow↔narrow</text>
+  <text x="755" y="330" text-anchor="middle" font-size="12.5" fill="#14532d">→ skip 경로엔 얇은 텐서만 = 온칩 버퍼·DRAM 대역폭 절약 (모바일 최적)</text>
+
+  <line x1="60" y1="356" x2="940" y2="356" stroke="#e2e8f0" stroke-width="2"/>
+
+  <!-- Linear bottleneck intuition -->
+  <text x="500" y="388" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">왜 마지막 Projection에 ReLU를 빼는가? — Linear Bottleneck의 직관 (논문 §3.2 · Figure 1)</text>
+
+  <rect x="70" y="408" width="270" height="130" rx="10" fill="#fef2f2" stroke="#dc2626"/>
+  <text x="205" y="434" text-anchor="middle" font-size="14" font-weight="700" fill="#7f1d1d">저차원에서 ReLU = 정보 파괴</text>
+  <text x="205" y="458" text-anchor="middle" font-size="12.5" fill="#991b1b">manifold를 낮은 차원(n=2,3)에 놓고</text>
+  <text x="205" y="477" text-anchor="middle" font-size="12.5" fill="#991b1b">ReLU를 걸면 음수 영역이 0으로 붕괴</text>
+  <text x="205" y="496" text-anchor="middle" font-size="12.5" fill="#991b1b">→ 점들이 뭉개져 복원 불가</text>
+  <text x="205" y="522" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b91c1c">∴ 좁은 bottleneck 뒤엔 ReLU 금지</text>
+
+  <rect x="365" y="408" width="270" height="130" rx="10" fill="#f0fdf4" stroke="#16a34a"/>
+  <text x="500" y="434" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">고차원에서 ReLU = 정보 보존 가능</text>
+  <text x="500" y="458" text-anchor="middle" font-size="12.5" fill="#166534">충분히 높은 차원(n=15~30)에 임베딩하면</text>
+  <text x="500" y="477" text-anchor="middle" font-size="12.5" fill="#166534">한 채널이 죽어도 다른 채널에 정보 잔존</text>
+  <text x="500" y="496" text-anchor="middle" font-size="12.5" fill="#166534">→ 비선형성 확보 + 복원 가능성 유지</text>
+  <text x="500" y="522" text-anchor="middle" font-size="12.5" font-weight="700" fill="#15803d">∴ ReLU는 확장(×t)된 넓은 층에서만</text>
+
+  <rect x="660" y="408" width="280" height="130" rx="10" fill="#eff6ff" stroke="#2563eb"/>
+  <text x="800" y="434" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">논문의 두 가지 통찰 (§3.2)</text>
+  <text x="800" y="460" text-anchor="middle" font-size="12.3" fill="#1e40af">1. ReLU 후 부피가 남는 부분은</text>
+  <text x="800" y="478" text-anchor="middle" font-size="12.3" fill="#1e40af">   사실상 선형 변환에 불과</text>
+  <text x="800" y="500" text-anchor="middle" font-size="12.3" fill="#1e40af">2. 입력 manifold가 저차원 부분공간에</text>
+  <text x="800" y="518" text-anchor="middle" font-size="12.3" fill="#1e40af">   있어야 ReLU가 정보를 보존</text>
+
+  <rect x="60" y="556" width="880" height="34" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <text x="500" y="578" text-anchor="middle" font-size="13" fill="#334155">Ablation(Figure 6): bottleneck에 ReLU6를 넣으면 정확도 수 % 하락 · skip을 expansion 사이에 두면 bottleneck 사이보다 성능 저하</text>
+</svg>

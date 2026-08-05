@@ -1,0 +1,82 @@
+<svg width="720" height="470" viewBox="0 0 720 470" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1.5 1.5L8 5L1.5 8.5" fill="none" stroke="#6B7280" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect width="720" height="470" fill="#FFFFFF"/>
+
+  <text x="130" y="42" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#0F6E56">입력 스트림</text>
+  <text x="130" y="58" text-anchor="middle" font-size="11.5" fill="#3E7D68">행마다 1사이클 지연 (skew)</text>
+
+  <text x="285" y="72" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#4C3585">필터 1</text>
+  <text x="379" y="72" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#4C3585">필터 2</text>
+  <text x="473" y="72" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#4C3585">필터 3</text>
+
+  <!-- 입력 텍스트 (계단) -->
+  <text x="195" y="116" text-anchor="middle" font-size="14" font-weight="bold" fill="#0F6E56">A₁</text>
+  <text x="160" y="116" text-anchor="middle" font-size="13" fill="#1D9E75">A₂</text>
+  <text x="125" y="116" text-anchor="middle" font-size="13" fill="#1D9E75">A₃</text>
+  <text x="170" y="182" text-anchor="middle" font-size="14" font-weight="bold" fill="#0F6E56">B₁</text>
+  <text x="135" y="182" text-anchor="middle" font-size="13" fill="#1D9E75">B₂</text>
+  <text x="100" y="182" text-anchor="middle" font-size="13" fill="#1D9E75">B₃</text>
+  <text x="145" y="248" text-anchor="middle" font-size="14" font-weight="bold" fill="#0F6E56">C₁</text>
+  <text x="110" y="248" text-anchor="middle" font-size="13" fill="#1D9E75">C₂</text>
+  <text x="75" y="248" text-anchor="middle" font-size="13" fill="#1D9E75">C₃</text>
+  <text x="120" y="314" text-anchor="middle" font-size="14" font-weight="bold" fill="#0F6E56">D₁</text>
+  <text x="85" y="314" text-anchor="middle" font-size="13" fill="#1D9E75">D₂</text>
+  <text x="50" y="314" text-anchor="middle" font-size="13" fill="#1D9E75">D₃</text>
+
+  <line x1="210" y1="112" x2="246" y2="112" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="185" y1="178" x2="246" y2="178" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="160" y1="244" x2="246" y2="244" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="135" y1="310" x2="246" y2="310" stroke="#6B7280" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+  <!-- PE 격자 (가중치 고정) -->
+  <g>
+    <rect x="250" y="90"  width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+    <rect x="344" y="90"  width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+    <rect x="438" y="90"  width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+    <rect x="250" y="156" width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+    <rect x="344" y="156" width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+    <rect x="438" y="156" width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+    <rect x="250" y="222" width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+    <rect x="344" y="222" width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+    <rect x="438" y="222" width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+    <rect x="250" y="288" width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+    <rect x="344" y="288" width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+    <rect x="438" y="288" width="70" height="44" rx="8" fill="#F0EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+  </g>
+  <g font-size="15" font-weight="bold" fill="#4C3585" text-anchor="middle">
+    <text x="285" y="117">a₁</text><text x="379" y="117">a₂</text><text x="473" y="117">a₃</text>
+    <text x="285" y="183">b₁</text><text x="379" y="183">b₂</text><text x="473" y="183">b₃</text>
+    <text x="285" y="249">c₁</text><text x="379" y="249">c₂</text><text x="473" y="249">c₃</text>
+    <text x="285" y="315">d₁</text><text x="379" y="315">d₂</text><text x="473" y="315">d₃</text>
+  </g>
+
+  <!-- 가로 전달 화살표 -->
+  <g stroke="#6B7280" stroke-width="1.4">
+    <line x1="322" y1="112" x2="340" y2="112" marker-end="url(#ar2)"/><line x1="416" y1="112" x2="434" y2="112" marker-end="url(#ar2)"/>
+    <line x1="322" y1="178" x2="340" y2="178" marker-end="url(#ar2)"/><line x1="416" y1="178" x2="434" y2="178" marker-end="url(#ar2)"/>
+    <line x1="322" y1="244" x2="340" y2="244" marker-end="url(#ar2)"/><line x1="416" y1="244" x2="434" y2="244" marker-end="url(#ar2)"/>
+    <line x1="322" y1="310" x2="340" y2="310" marker-end="url(#ar2)"/><line x1="416" y1="310" x2="434" y2="310" marker-end="url(#ar2)"/>
+  </g>
+  <!-- 세로 부분합 화살표 -->
+  <g stroke="#6B7280" stroke-width="1.4">
+    <line x1="285" y1="134" x2="285" y2="152" marker-end="url(#ar2)"/><line x1="379" y1="134" x2="379" y2="152" marker-end="url(#ar2)"/><line x1="473" y1="134" x2="473" y2="152" marker-end="url(#ar2)"/>
+    <line x1="285" y1="200" x2="285" y2="218" marker-end="url(#ar2)"/><line x1="379" y1="200" x2="379" y2="218" marker-end="url(#ar2)"/><line x1="473" y1="200" x2="473" y2="218" marker-end="url(#ar2)"/>
+    <line x1="285" y1="266" x2="285" y2="284" marker-end="url(#ar2)"/><line x1="379" y1="266" x2="379" y2="284" marker-end="url(#ar2)"/><line x1="473" y1="266" x2="473" y2="284" marker-end="url(#ar2)"/>
+    <line x1="285" y1="332" x2="285" y2="362" marker-end="url(#ar2)"/><line x1="379" y1="332" x2="379" y2="362" marker-end="url(#ar2)"/><line x1="473" y1="332" x2="473" y2="362" marker-end="url(#ar2)"/>
+  </g>
+
+  <g font-size="15" font-weight="bold" fill="#1F2937" text-anchor="middle">
+    <text x="285" y="384">y₁</text><text x="379" y="384">y₂</text><text x="473" y="384">y₃</text>
+  </g>
+  <text x="379" y="404" text-anchor="middle" font-size="11.5" fill="#4B5563">y₁ = A₁a₁ + B₁b₁ + C₁c₁ + D₁d₁  (사이클 4에 첫 출력, 이후 매 사이클 1개)</text>
+
+  <line x1="508" y1="178" x2="522" y2="178" stroke="#9CA3AF" stroke-width="1.2"/>
+  <text x="528" y="182" font-size="12" fill="#4B5563">각 PE에 가중치 고정</text>
+  <text x="528" y="198" font-size="12" fill="#4B5563">(weight-stationary)</text>
+
+  <text x="360" y="440" text-anchor="middle" font-size="12.5" fill="#374151">부분합은 ↓ 방향으로 흐르며 누산되어 열 j 아래에서 출력 채널 j 완성 · 입력은 → 방향으로 전달되며 모든 열에 재사용</text>
+</svg>

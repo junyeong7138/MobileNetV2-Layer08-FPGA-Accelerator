@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" font-family="'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1000" height="560" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#1e293b">그림 1. 표준 컨볼루션 vs Depthwise Separable Convolution (MobileNet 계열의 기본 블록)</text>
+
+  <!-- ===== Standard conv ===== -->
+  <text x="60" y="76" font-size="16" font-weight="700" fill="#0f172a">(a) 표준 컨볼루션</text>
+  <!-- input tensor -->
+  <g>
+    <rect x="60" y="110" width="90" height="90" fill="#c7d2fe" stroke="#4338ca"/>
+    <rect x="72" y="98" width="90" height="90" fill="#a5b4fc" stroke="#4338ca"/>
+    <rect x="84" y="86" width="90" height="90" fill="#818cf8" stroke="#4338ca"/>
+    <text x="118" y="222" text-anchor="middle" font-size="13" fill="#312e81">입력 hᵢ×wᵢ×dᵢ</text>
+  </g>
+  <line x1="190" y1="140" x2="250" y2="140" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- kernel -->
+  <g>
+    <rect x="258" y="118" width="44" height="44" fill="#fecaca" stroke="#b91c1c"/>
+    <rect x="266" y="110" width="44" height="44" fill="#fca5a5" stroke="#b91c1c"/>
+    <rect x="274" y="102" width="44" height="44" fill="#f87171" stroke="#b91c1c"/>
+    <text x="290" y="182" text-anchor="middle" font-size="13" fill="#7f1d1d">커널 k×k×dᵢ</text>
+    <text x="290" y="200" text-anchor="middle" font-size="13" fill="#7f1d1d">× dⱼ개</text>
+  </g>
+  <line x1="336" y1="140" x2="396" y2="140" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- output -->
+  <g>
+    <rect x="404" y="112" width="80" height="80" fill="#bbf7d0" stroke="#15803d"/>
+    <rect x="416" y="100" width="80" height="80" fill="#86efac" stroke="#15803d"/>
+    <rect x="428" y="88" width="80" height="80" fill="#4ade80" stroke="#15803d"/>
+    <text x="458" y="215" text-anchor="middle" font-size="13" fill="#14532d">출력 hᵢ×wᵢ×dⱼ</text>
+  </g>
+  <rect x="560" y="90" width="380" height="96" rx="10" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="750" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">연산량 (MAC)</text>
+  <text x="750" y="150" text-anchor="middle" font-size="17" fill="#b91c1c" font-weight="700">hᵢ · wᵢ · dᵢ · dⱼ · k²</text>
+  <text x="750" y="174" text-anchor="middle" font-size="13" fill="#475569">모든 입력 채널 × 모든 출력 채널이 결합</text>
+
+  <line x1="60" y1="252" x2="940" y2="252" stroke="#e2e8f0" stroke-width="2"/>
+
+  <!-- ===== Depthwise separable ===== -->
+  <text x="60" y="288" font-size="16" font-weight="700" fill="#0f172a">(b) Depthwise Separable = Depthwise(공간 필터링) + Pointwise 1×1(채널 결합)  —  두 단계로 분해</text>
+  <!-- input -->
+  <g>
+    <rect x="60" y="330" width="80" height="80" fill="#c7d2fe" stroke="#4338ca"/>
+    <rect x="71" y="319" width="80" height="80" fill="#a5b4fc" stroke="#4338ca"/>
+    <rect x="82" y="308" width="80" height="80" fill="#818cf8" stroke="#4338ca"/>
+    <text x="111" y="432" text-anchor="middle" font-size="13" fill="#312e81">입력 hᵢ×wᵢ×dᵢ</text>
+  </g>
+  <line x1="176" y1="358" x2="222" y2="358" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- depthwise: one k×k per channel -->
+  <g>
+    <rect x="230" y="322" width="36" height="36" fill="#fde68a" stroke="#b45309"/>
+    <rect x="238" y="336" width="36" height="36" fill="#fcd34d" stroke="#b45309"/>
+    <rect x="246" y="350" width="36" height="36" fill="#fbbf24" stroke="#b45309"/>
+    <text x="258" y="410" text-anchor="middle" font-size="13" font-weight="700" fill="#78350f">Depthwise k×k</text>
+    <text x="258" y="428" text-anchor="middle" font-size="12" fill="#78350f">채널당 필터 1개 (채널 간 결합 X)</text>
+  </g>
+  <line x1="296" y1="358" x2="342" y2="358" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- intermediate -->
+  <g>
+    <rect x="350" y="330" width="80" height="80" fill="#e9d5ff" stroke="#7e22ce"/>
+    <rect x="361" y="319" width="80" height="80" fill="#d8b4fe" stroke="#7e22ce"/>
+    <rect x="372" y="308" width="80" height="80" fill="#c084fc" stroke="#7e22ce"/>
+    <text x="401" y="432" text-anchor="middle" font-size="13" fill="#581c87">중간 hᵢ×wᵢ×dᵢ</text>
+  </g>
+  <line x1="466" y1="358" x2="512" y2="358" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- pointwise -->
+  <g>
+    <rect x="520" y="340" width="18" height="18" fill="#f87171" stroke="#b91c1c"/>
+    <rect x="527" y="347" width="18" height="18" fill="#fca5a5" stroke="#b91c1c"/>
+    <rect x="534" y="354" width="18" height="18" fill="#fecaca" stroke="#b91c1c"/>
+    <text x="537" y="410" text-anchor="middle" font-size="13" font-weight="700" fill="#7f1d1d">Pointwise 1×1×dᵢ</text>
+    <text x="537" y="428" text-anchor="middle" font-size="12" fill="#7f1d1d">× dⱼ개 (채널 선형 결합)</text>
+  </g>
+  <line x1="566" y1="358" x2="612" y2="358" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- output -->
+  <g>
+    <rect x="620" y="332" width="72" height="72" fill="#bbf7d0" stroke="#15803d"/>
+    <rect x="631" y="321" width="72" height="72" fill="#86efac" stroke="#15803d"/>
+    <rect x="642" y="310" width="72" height="72" fill="#4ade80" stroke="#15803d"/>
+    <text x="668" y="432" text-anchor="middle" font-size="13" fill="#14532d">출력 hᵢ×wᵢ×dⱼ</text>
+  </g>
+  <rect x="746" y="300" width="204" height="120" rx="10" fill="#f0fdf4" stroke="#16a34a"/>
+  <text x="848" y="326" text-anchor="middle" font-size="15" font-weight="700" fill="#14532d">연산량 (MAC)</text>
+  <text x="848" y="352" text-anchor="middle" font-size="15" fill="#166534" font-weight="700">hᵢ·wᵢ·dᵢ·(k² + dⱼ)</text>
+  <text x="848" y="376" text-anchor="middle" font-size="12.5" fill="#166534">절감비 = k²·dⱼ/(k²+dⱼ)</text>
+  <text x="848" y="398" text-anchor="middle" font-size="13" fill="#15803d" font-weight="700">k=3 → 약 8~9배 절감</text>
+
+  <rect x="60" y="470" width="880" height="66" rx="10" fill="#eff6ff" stroke="#2563eb"/>
+  <text x="80" y="497" font-size="14" fill="#1e3a8a" font-weight="700">★ 하드웨어 관점</text>
+  <text x="80" y="521" font-size="13.5" fill="#1e40af">Depthwise는 채널별 독립 연산 → PE 병렬화가 쉽지만 MAC 대비 데이터 이동이 많아(연산 강도 낮음) 메모리 바운드 되기 쉬움 · Pointwise 1×1은 사실상 행렬곱(GEMM) → MAC 어레이 활용에 유리</text>
+</svg>
